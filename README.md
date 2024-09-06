@@ -1,0 +1,1 @@
+This repository is designed for educational purposes as part of a machine learning course at ONU
