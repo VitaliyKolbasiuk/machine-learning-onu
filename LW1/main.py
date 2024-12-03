@@ -26,7 +26,7 @@ df = pd.read_csv('../data/OnlineNewsPopularityReduced.csv', delimiter=',')
 
 # Відображення інформації про набір даних
 print(df.info())
-print("\nОписова статистика для числових стовпців:")
+print("\nОписова статистика для числових змінним:")
 print(df.describe())
 
 
