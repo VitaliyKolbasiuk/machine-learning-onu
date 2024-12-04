@@ -26,8 +26,17 @@ df = pd.read_csv('../data/OnlineNewsPopularityReduced.csv', delimiter=',')
 
 # Відображення інформації про набір даних
 print(df.info())
-print("\nОписова статистика для числових змінним:")
+print("\nОписова статистика по числовим змінним:")
 print(df.describe())
+
+# Вибір лише категоріальних змінних
+categorical_columns = [col for col in df.columns if 'is_' in col or df[col].nunique() <= 10]
+
+# Виведення описової статистики для кожної категоріальної змінної
+for column in categorical_columns:
+    print(f"Описова статистика по категоріальній змінній: {column}")
+    print(df[column].describe())
+    print("\n")
 
 
 # Функція для візуалізації розподілів та виявлення викидів
