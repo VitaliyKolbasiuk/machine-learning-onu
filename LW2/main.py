@@ -24,8 +24,9 @@ def evaluate_model(model, X_test, y_test, model_name="Модель"):
     y_pred = model.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
     mae = mean_absolute_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
     mape = mean_absolute_percentage_error(y_test, y_pred)
-    print(f"{model_name} - MSE: {mse}, MAE: {mae}, MAPE: {mape}")
+    print(f"{model_name} - MSE: {mse}, MAE: {mae}, RMSE: {rmse}, MAPE: {mape}")
     return mse
 
 # Завантаження набору даних
