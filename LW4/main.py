@@ -67,14 +67,14 @@ def main():
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # 1. Decision Tree з базовими параметрами
+    # Decision Tree з базовими параметрами
     regressor = DecisionTreeRegressor(random_state=42)
     regressor.fit(X_train, y_train)
     y_pred = regressor.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
     print(f"Середньоквадратична помилка (MSE): {mse:.2f}")
 
-    # 2. Крос-валідація та підбір найкращих гіперпараметрів для DecisionTreeRegressor
+    # Крос-валідація та підбір найкращих гіперпараметрів для DecisionTreeRegressor
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     param_grid_dt = {
         'max_depth': [3, 5, 10, 15, 20],
@@ -134,7 +134,7 @@ def main():
     plt.grid()
     plt.show()
 
-    # 3. RandomForestRegressor з параметрами за замовчуванням
+    # RandomForestRegressor з параметрами за замовчуванням
     rf_default = RandomForestRegressor(random_state=42)
     rf_default.fit(X_train, y_train)
     y_pred_rf = rf_default.predict(X_test)
