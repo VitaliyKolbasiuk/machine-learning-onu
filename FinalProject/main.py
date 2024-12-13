@@ -6,26 +6,26 @@ from preprocessing import load_and_preprocess_data
 from utils import plot_validation_curve
 from modeling import evaluate_model
 from models import (
-    train_decision_tree, tune_decision_tree,
-    train_xgb, tune_xgb,
-    train_knn, tune_knn
+    train_decision_tree, hyperparams_decision_tree,
+    train_xgb, hyperparams_xgb,
+    train_knn, hyperparams_knn
 )
 
 MODELS = [
     {
         "name": "DecisionTreeClassifier",
         "train_func": train_decision_tree,
-        "tune_func": tune_decision_tree
+        "hyperparams_func": hyperparams_decision_tree
     },
     {
         "name": "XGBoostClassifier",
         "train_func": train_xgb,
-        "tune_func": tune_xgb
+        "hyperparams_func": hyperparams_xgb
     },
     {
         "name": "KNeighborsClassifier",
         "train_func": train_knn,
-        "tune_func": tune_knn
+        "hyperparams_func": hyperparams_knn
     }
 ]
 
@@ -33,15 +33,15 @@ MODELS = [
 def process_models(model_info, X_train, y_train, X_test, y_test, kf):
     name = model_info["name"]
     train_func = model_info["train_func"]
-    tune_func = model_info["tune_func"]
+    hyperparams_func = model_info["hyperparams_func"]
     # Навчання базової моделі
     model = train_func(X_train, y_train)
-    print(f"Initial {name} performance:")
+    print(f"Initial {name}:")
     evaluate_model(model, X_test, y_test, name)
     # Тюнінг моделі
-    grid, params = tune_func(model, X_train, y_train, kf)
-    print(f"Tuned {name} performance:")
-    evaluate_model(grid.best_estimator_, X_test, y_test, f"{name} (tuned)")
+    grid, params = hyperparams_func(model, X_train, y_train, kf)
+    print(f"Using hyperparams {name}:")
+    evaluate_model(grid.best_estimator_, X_test, y_test, f"{name} (with hyperparams)")
     # Побудова валідаційних кривих
     for param_name, param_values in params.items():
         plot_validation_curve(grid, param_name, param_values)
