@@ -37,4 +37,3 @@ def load_and_preprocess_data(data_path: str):
     )
     X = preprocessor.fit_transform(X)
     return X, y, df
-s
