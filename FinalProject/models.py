@@ -1,9 +1,10 @@
+from collections import Counter
+
 import numpy as np
 import xgboost as xgb
-from collections import Counter
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 
 def train_decision_tree(X_train, y_train):
